@@ -4,6 +4,8 @@ var LocalStrategy   = require('passport-local').Strategy;
 // load up the user model
 var User            = require('../app/models/user');
 
+var mongoose = require('mongoose');
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
@@ -15,13 +17,11 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-	console.log('1');
 	done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-	console.log('2');
 	User.findById(id, function(err, user) {
 	    done(err, user);
 	});
@@ -47,8 +47,11 @@ module.exports = function(passport) {
 
 							   // find a user whose email is the same as the forms email
 							   // we are checking to see if the user trying to login already exists
+							   console.log('before findOne');
+							   console.log(mongoose.connection.readyState);
 							   User.findOne({ 'local.email' :  email }, function(err, user) {
 							       // if there are any errors, return the error
+							       console.log('test');
 							       if (err)
 								   return done(err);
 

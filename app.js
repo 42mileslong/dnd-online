@@ -42,6 +42,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
+//test connection
+console.log('mongoose test');
+console.log(mongoose.connection.readyState);
+mongoose.connection.once('open', function callback () {
+    console.log("h");
+});
+mongoose.connection.on('connected', function () {
+    console.log('Mongoose default connection open to ' + dbURI);
+}); 
+mongoose.connection.on('error', function(err) {
+    console.error('MongoDB error: %s', err);
+});
+
 require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
