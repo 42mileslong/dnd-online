@@ -20,9 +20,7 @@ var signup = require('./routes/signup')(passport);
 var profile = require('./routes/profile');
 var logout = require('./routes/logout');
 
-
 //var configDB = require('./config/database.js');
-
 var app = express();
 
 // view engine setup
@@ -57,6 +55,9 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 //require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/login', login);
