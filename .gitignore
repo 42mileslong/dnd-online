@@ -1,3 +1,12 @@
-node_modules
-secrets.js
+# Linux
+.directory
 *~
+
+# npm
+node_modules
+package-lock.json
+*.log
+*.gz
+    
+# other
+secrets.js
